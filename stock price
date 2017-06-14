@@ -1,0 +1,15 @@
+%% calculate the stock price using binomial tree
+function [exp_boundary,stock]=Stock(N)
+    lattice_1=zeros(N+1,N+1);
+    lattice_1(1,1)=100;
+    for j=0:N
+        for i=0:j
+            lattice_1(i+1,j+1)=lattice_1(1,1)+5/N*10*(j-i)+(-10)*i*5/N;
+        end
+    end
+    stock=lattice_1;
+    lattice_2=zeros(N+1,N+1);
+    for i=0:N
+        lattice_2(i+1,N+1)=max(0,(lattice_1(i+1,N+1)-70));
+    end
+    exp_boundary=lattice_2;
